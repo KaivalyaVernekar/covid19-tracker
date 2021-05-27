@@ -3,3 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.video {
+  height: 90vh;
+
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 250, 0.6)
+  );
+  background-size: cover;
+  background-position: top;
+  z-index: -10;
+}
