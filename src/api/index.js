@@ -7,13 +7,17 @@ const url = "https://corona-api.com";
 export const fetchData = async (country) => {
   if (country) {
     try {
-      const objData = await axios.get(`${url}/countries/${country}`);
+      const {
+        data: {
+          data: { timeline },
+        },
+      } = await axios.get(`${url}/countries/${country}`);
 
       const modifiedCountryData = {
-        confirmed: objData.data.data.latest_data.confirmed,
-        recovered: objData.data.data.latest_data.recovered,
-        deaths: objData.data.data.latest_data.deaths,
-        updated_at: objData.data.data.updated_at,
+        confirmed: timeline[0].confirmed,
+        recovered: timeline[0].recovered,
+        deaths: timeline[0].deaths,
+        updated_at: timeline[0].updated_at,
       };
       return modifiedCountryData;
     } catch (error) {
@@ -59,6 +63,47 @@ export const fetchDailyData = async () => {
   }
 };
 
+/*send to chart.js* | country's dailyData*/
+export const fetchCountryDailyData = async (country) => {
+  if (country) {
+    try {
+      const {
+        data: {
+          data: { timeline },
+        },
+      } = await axios.get(`${url}/countries/${country}`);
+
+      const modifiedData2 = timeline.map((countryDailyData) => ({
+        confirmed: countryDailyData.confirmed,
+        recovered: countryDailyData.recovered,
+        deaths: countryDailyData.deaths,
+        date: countryDailyData.date,
+      }));
+
+      return modifiedData2;
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      const {
+        data: { data },
+      } = await axios.get(`${url}/timeline`);
+
+      const modifiedData2 = data.map((dailyData) => ({
+        confirmed: dailyData.confirmed,
+        recovered: dailyData.recovered,
+        deaths: dailyData.deaths,
+        date: dailyData.date,
+      }));
+
+      return modifiedData2;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
 /*sent to countrypicker.js | fetching countries*/
 export const fetchCountries = async () => {
   try {
@@ -66,12 +111,32 @@ export const fetchCountries = async () => {
       data: { data },
     } = await axios.get(`${url}/countries`);
 
-    const countryNames = data.map((country) => ({
+    const filteredCountries = data.filter((country) => {
+      return (
+        country.latest_data.confirmed !== 0 &&
+        country.latest_data.recovered !== 0 &&
+        country.latest_data.deaths !== 0
+      );
+    });
+
+    const countryNames = filteredCountries.map((country) => ({
       name: country.name,
       code: country.code,
     }));
     console.log(countryNames);
-    return countryNames;
+
+    const sortedCountryNames = countryNames.sort((country1, country2) => {
+      var nameA = country1.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = country2.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameA > nameB) {
+        return 1;
+      }
+    });
+
+    console.log(sortedCountryNames);
+    return sortedCountryNames;
   } catch (error) {
     console.log(error);
   }
