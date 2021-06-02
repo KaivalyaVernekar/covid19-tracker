@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const url = "https://corona-api.com";
-/*const url2 = "https://corona-api.com/countries";*/
 
 /*sent to app.js*/
 export const fetchData = async (country) => {
@@ -158,3 +157,91 @@ export const fetchCountryData = async (country) => {
     console.log(error);
   }
 };*/
+
+/*----------------India's state details API----------------*/
+
+const url2 = "https://corona-api.com/countries/IN";
+const url3 = "https://api.covid19india.org/data.json";
+
+/*sent to India.js from there as prop to Cards.js*/
+export const fetchIndiaData = async (states) => {
+  if (states) {
+    try {
+      const {
+        data: { statewise },
+      } = await axios.get(url3);
+
+      const modifiedIndiaStatesData = statewise.filter((checkState) => {
+        return checkState.state === states;
+      });
+
+      const modifiedIndiaStatesData2 = {
+        confirmed: modifiedIndiaStatesData[0].confirmed,
+        recovered: modifiedIndiaStatesData[0].recovered,
+        deaths: modifiedIndiaStatesData[0].deaths,
+        updated_at: modifiedIndiaStatesData[0].lastupdatedtime,
+      };
+
+      console.log(modifiedIndiaStatesData2);
+      return modifiedIndiaStatesData2;
+    } catch (error) {}
+  } else {
+    try {
+      const {
+        data: {
+          data: { timeline },
+        },
+      } = await axios.get(url2);
+
+      const modifiedIndiaData = {
+        confirmed: timeline[0].confirmed,
+        recovered: timeline[0].recovered,
+        deaths: timeline[0].deaths,
+        updated_at: timeline[0].updated_at,
+      };
+      return modifiedIndiaData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+/*sent to ChartIndia.js as India's total*/
+export const fetchIndiaDailyData = async () => {
+  try {
+    const {
+      data: {
+        data: { timeline },
+      },
+    } = await axios.get(url2);
+
+    const modifiedIndiaData2 = timeline.map((IndiaDailyData) => ({
+      confirmed: IndiaDailyData.confirmed,
+      recovered: IndiaDailyData.recovered,
+      deaths: IndiaDailyData.deaths,
+      date: IndiaDailyData.date,
+    }));
+
+    return modifiedIndiaData2;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/*sent to StatePickerIndia.js to fetch states*/
+export const fetchIndiaStates = async () => {
+  try {
+    const {
+      data: { statewise },
+    } = await axios.get(url3);
+
+    const filteredStates = statewise.filter((states) => {
+      return states.state !== "Total";
+    });
+
+    const StateNames = filteredStates.map((states) => states.state);
+
+    console.log(StateNames);
+    return StateNames;
+  } catch (error) {}
+};

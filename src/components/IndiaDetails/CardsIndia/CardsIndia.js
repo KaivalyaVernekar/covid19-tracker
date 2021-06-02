@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
-import styles from "./Cards.module.css";
+import styles from "./CardsIndia.module.css";
 import cx from "classnames";
 
 const Cards = ({ data: { confirmed, recovered, deaths, updated_at } }) => {
@@ -9,6 +9,14 @@ const Cards = ({ data: { confirmed, recovered, deaths, updated_at } }) => {
   if (!confirmed) {
     return "Loading...";
   }
+
+  const currentDate = new Date(updated_at);
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+
+  const dateString =
+    currentMonth + 1 + "/" + currentDayOfMonth + "/" + currentYear;
 
   return (
     <div className={styles.container}>
@@ -28,7 +36,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, updated_at } }) => {
               <CountUp start={0} end={confirmed} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(updated_at).toDateString()}
+              {new Date(dateString).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of active cases of Covid-19
@@ -51,7 +59,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, updated_at } }) => {
               <CountUp start={0} end={recovered} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(updated_at).toDateString()}
+              {new Date(dateString).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of recoveries from Covid-19
@@ -74,7 +82,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, updated_at } }) => {
               <CountUp start={0} end={deaths} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(updated_at).toDateString()}
+              {new Date(dateString).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of deaths due to Covid-19
