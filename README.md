@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+<h1 align="center">Covid19 Tracker</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<hr />
+<a href="https://livecovid19tracking.netlify.app/" target="_blank">View Project</a>
+<hr />
+<div align="center" autoplay={true} muted={true} loop={true} object-fit="cover">
 
-## Available Scripts
+<!-- Add your project demo gif here -->
 
-In the project directory, you can run:
+![Project Demo Gif]()
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<hr />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="left"> This is a realtime Covid19 tracking site built using <strong>ReactJS</strong> and <strong>Axios</strong> for fetching data from API. Tracking live data globally also including specific countries, along with India and its states. It uses <strong>React Router</strong> to navigate between pages and also has <strong>line & bar charts</strong> displaying historical data and <strong>count-up</strong> feature while displaying the numbers using <strong>Material-UI</strong>.</p>
 
-### `npm test`
+## 💡Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Realtime data display
+2. Line and Bar Charts
+3. Count-up
+4. Router navigation
+5. Responsive
 
-### `npm run build`
+## ⛏️Built with
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ReactJS
+- Axios
+- React Router
+- Chart.js
+- Material-UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🏁Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Step to setup local dev environment:
 
-### `npm run eject`
+1. Clone this repo
+1. Install all the dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   npm install
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Tweak the code
+1. Run on local server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   ```bash
+   npm start
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📈Future Plans
 
-## Learn More
+- Add live India's District-wise data display
+- Add live India's vaccinated data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🧬Resources
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [React Docs](https://reactjs.org/)
+- [Axios](https://axios-http.com/docs/intro)
+- [Chart.js](https://www.chartjs.org/docs/latest/)
+- [Material-UI](https://material-ui.com/)
 
-### Code Splitting
+## 🎉Acknowledgement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [about-corona-API](https://about-corona.net/documentation)
+- [API](https://api.covid19india.org/data.json)
 
-### Analyzing the Bundle Size
+## 👋End Note
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Appreciate for taking time to read it. I strongly suggest you to have a look at the website.
