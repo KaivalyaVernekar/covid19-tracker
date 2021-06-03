@@ -7,7 +7,7 @@
 
 <!-- Add your project demo gif here -->
 
-![Project Demo Gif]()
+![Project Demo Gif](https://media.giphy.com/media/Y6TaMwhqy7MtJF7W1n/giphy.gif)
 
 </div>
 
