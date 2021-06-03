@@ -11,11 +11,8 @@ const Chart = ({ country }) => {
       setDailyData(await fetchDailyData());
     };
     fetchAPI();
-    /*console.log(dailyData);*/
-    /*dailyData.reverse();*/
   }, []);
 
-  console.log(country);
   const lineChart = dailyData.length ? (
     <Line
       data={{
@@ -83,29 +80,6 @@ const Chart = ({ country }) => {
       }}
     />
   ) : null;
-
-  /*const barChart = confirmed ? (
-    <Bar
-      data={{
-        labels: ["Infected", "Recovered", "Deaths"],
-        datasets: [
-          {
-            label: "People",
-            backgroundColor: [
-              "rgba(0, 0, 255, 0.8)",
-              "rgba(0, 255, 0, 0.8)",
-              "rgba(255, 0, 0, 0.8)",
-            ],
-            data: [confirmed, recovered, deaths],
-          },
-        ],
-      }}
-      options={{
-        legend: { display: false },
-        title: { display: true, text: `Current state in ${country}` },
-      }}
-    />
-  ) : null;*/
 
   return (
     <div className={styles.container}>{country ? lineChart2 : lineChart}</div>

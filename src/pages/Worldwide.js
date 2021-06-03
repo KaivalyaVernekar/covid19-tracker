@@ -13,25 +13,20 @@ class App extends Component {
 
   async componentDidMount() {
     const fetchedData = await fetchData();
-    /*const fetchedCountryDailyData = await fetchCountryDailyData();*/
 
     this.setState({ data: fetchedData });
-    /*this.setState({ countryDaily: fetchedCountryDailyData });*/
   }
 
   //pass as prop to country picker(below)//
   handleCountryChange = async (country) => {
     const fetchedData = await fetchData(country);
-    console.log(country);
+
     const fetchedCountryDailyData = await fetchCountryDailyData(country);
-    console.log(fetchedCountryDailyData);
+
     this.setState({
       data: fetchedData,
       country: fetchedCountryDailyData,
     });
-
-    //fetch the data // set the state//
-    /*console.log(fetchedData);*/
   };
 
   render() {

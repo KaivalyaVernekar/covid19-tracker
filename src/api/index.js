@@ -2,8 +2,9 @@ import axios from "axios";
 
 const url = "https://corona-api.com";
 
-/*sent to app.js*/
+/*sent to app.js for worldwide and country-wise data*/
 export const fetchData = async (country) => {
+  /*country data*/
   if (country) {
     try {
       const {
@@ -23,6 +24,7 @@ export const fetchData = async (country) => {
       console.log(error);
     }
   } else {
+    /*worldwide data*/
     try {
       //nested destructuring of the api object//
       const {
@@ -122,7 +124,6 @@ export const fetchCountries = async () => {
       name: country.name,
       code: country.code,
     }));
-    console.log(countryNames);
 
     const sortedCountryNames = countryNames.sort((country1, country2) => {
       var nameA = country1.name.toUpperCase(); // ignore upper and lowercase
@@ -132,31 +133,14 @@ export const fetchCountries = async () => {
       } else if (nameA > nameB) {
         return 1;
       }
+      return sortedCountryNames;
     });
 
-    console.log(sortedCountryNames);
     return sortedCountryNames;
   } catch (error) {
     console.log(error);
   }
 };
-
-/*extra later "if" doesn't work*/
-/*sent to app.js
-export const fetchCountryData = async (country) => {
-  try {
-    const {
-      data: {
-        data: {
-          latest_data: { confirmed, recovered, deaths },
-        },
-      },
-    } = await axios.get(`${url}/countries/${country.code}`);
-    console.log(confirmed, recovered, deaths);
-  } catch (error) {
-    console.log(error);
-  }
-};*/
 
 /*----------------India's state details API----------------*/
 
@@ -175,16 +159,33 @@ export const fetchIndiaData = async (states) => {
         return checkState.state === states;
       });
 
+      /*function to change the date string template to match others*/
+      const changeDataString = (curDate) => {
+        const currentDate = new Date(curDate);
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+        const currentYear = currentDate.getFullYear();
+
+        const dateString = `${currentYear}-${currentDayOfMonth}-${
+          currentMonth + 1
+        }`;
+
+        return dateString;
+      };
+
       const modifiedIndiaStatesData2 = {
         confirmed: modifiedIndiaStatesData[0].confirmed,
         recovered: modifiedIndiaStatesData[0].recovered,
         deaths: modifiedIndiaStatesData[0].deaths,
-        updated_at: modifiedIndiaStatesData[0].lastupdatedtime,
+        updated_at: changeDataString(
+          modifiedIndiaStatesData[0].lastupdatedtime
+        ),
       };
 
-      console.log(modifiedIndiaStatesData2);
       return modifiedIndiaStatesData2;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     try {
       const {
@@ -206,7 +207,7 @@ export const fetchIndiaData = async (states) => {
   }
 };
 
-/*sent to ChartIndia.js as India's total*/
+/*sent to Chart.js as India's total*/
 export const fetchIndiaDailyData = async () => {
   try {
     const {
@@ -241,7 +242,8 @@ export const fetchIndiaStates = async () => {
 
     const StateNames = filteredStates.map((states) => states.state);
 
-    console.log(StateNames);
     return StateNames;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
